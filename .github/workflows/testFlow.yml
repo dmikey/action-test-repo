@@ -6,7 +6,7 @@ jobs:
     name: a job to deploy on akash network
     steps:
       - name: Check Akash Version
-        uses: dmikey/akash-on-gh-actions@v1.0.80
+        uses: dmikey/akash-on-gh-actions@v1.0.81
         with:
           walletkey: ${{ secrets.AKASH_WALLET_KEY }}
           walletkeypass: ${{ secrets.AKASH_WALLET_KEY_PASSWORD }}
