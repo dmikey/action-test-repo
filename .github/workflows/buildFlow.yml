@@ -1,4 +1,4 @@
-name: Repository Dispatch
+name: Build and Publish Image
 on:
   repository_dispatch:
     types: [build-event]

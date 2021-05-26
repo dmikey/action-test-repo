@@ -1,6 +1,7 @@
+name: Update Deployment on Akash
 on:
   workflow_run:
-    workflows: ["Repository Dispatch"]
+    workflows: ["Build and Publish Image"]
     types:
       - completed
 env:
@@ -18,15 +19,6 @@ jobs:
   publish-on-akash:
     runs-on: ubuntu-20.04
     steps:
-      - name: Extract tag name
-        id: tag
-        uses: actions/github-script@0.2.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            return context.payload.ref.replace(/\/refs\/tags\//, '');
-      - name: Echo
-        run: echo ${{ steps.tag.outputs.result }}
       - uses: actions/checkout@v2
       - name: installing toolset
         run: sudo apt install wget curl jq
@@ -49,7 +41,8 @@ jobs:
           echo "AKASH_DSEQ=$AKASH_DSEQ" >> $GITHUB_ENV
       - name: update deployment
         run: |-
-          unset AKASH_GAS
+          export LATEST_TAG=$(git remote update && git describe --abbrev=0 --tags)
+          echo LATEST_TAG
           akash tx deployment update deploy.yml --dseq $AKASH_DSEQ --from ${{env.AKASH_FROM}} --chain-id ${{env.AKASH_CHAIN_ID}}  --node ${{env.AKASH_NODE}} -y
       - name: query deployment
         run: |-
