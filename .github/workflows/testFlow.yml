@@ -1,7 +1,8 @@
 name: Update Deployment on Akash
 on:
-  repository_dispatch:
-    types: [update-deploy]
+  create:
+    tags:
+      - v*
 env:
   AKASH_HOME: /home/runner/.akash
   AKASH_NODE: tcp://rpc0.mainnet.akash.network:26657
@@ -17,6 +18,15 @@ jobs:
   publish-on-akash:
     runs-on: ubuntu-20.04
     steps:
+      - name: Extract tag name
+        id: tag
+        uses: actions/github-script@0.2.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            return context.payload.ref.replace(/\/refs\/tags\//, '');
+      - name: Echo
+        run: echo ${{ steps.tag.outputs.result }}
       - uses: actions/checkout@v2
       - name: installing toolset
         run: sudo apt install wget curl jq
