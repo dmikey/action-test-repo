@@ -30,7 +30,7 @@ jobs:
           echo "${{secrets.AKASH_WALLET_KEY_PASSWORD}}" | akash keys import ${{env.AKASH_FROM}} key.key
           rm key.key
       - name: import certificate
-        run: echo "${{secrets.DEPLOY_CERT}}" > ${{env.AKASH_HOME}}/$(akash keys show ${{env.AKASH_FROM}} --output=json | jq -r ".address").pem
+        run: echo "${{secrets.AKASH_DEPLOY_CERTIFICATE}}" > ${{env.AKASH_HOME}}/$(akash keys show ${{env.AKASH_FROM}} --output=json | jq -r ".address").pem
       - name: get last active deployments
         run: |-
           export AKASH_DSEQ=$(akash query deployment list --owner "$(akash keys show "AKASH_GROWTH_TEAM" -a)" --state active -o json --limit 1 | jq -r ".deployments[0].deployment.deployment_id.dseq")
