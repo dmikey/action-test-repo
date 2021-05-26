@@ -1,5 +1,7 @@
-on: [push]
-
+name: Update Deployment on Akash
+on:
+  repository_dispatch:
+    types: [update-deploy]
 env:
   AKASH_HOME: /home/runner/.akash
   AKASH_NODE: tcp://rpc0.mainnet.akash.network:26657
