@@ -33,9 +33,10 @@ jobs:
       - name: get last active deployments
         run: |-
           export AKASH_DSEQ=$(akash query deployment list --owner "$(akash keys show "AKASH_GROWTH_TEAM" -a)" --state active -o json --limit 1 | jq -r ".deployments[0].deployment.deployment_id.dseq")
+          echo ${{env.AKASH_DSEQ}}
       - name: update deployment
         run: |-
-          akash tx deployment update deploy.yml --dseq $AKASH_DSEQ --from $AKASH_FROM --chain-id $AKASH_CHAIN_ID --node $AKASH_NODE --fees=5000uakt -y
+          akash tx deployment update deploy.yml --dseq ${{env.AKASH_DSEQ}} --from ${{env.AKASH_FROM}} --chain-id $AKASH_CHAIN_ID --node $AKASH_NODE --fees=5000uakt -y
       - name: query deployment
         run: |-
-          akash provider lease-status --node $AKASH_NODE --dseq $AKASH_DSEQ --from $AKASH_FROM --provider $AKASH_PROVIDER
+          akash provider lease-status --node $AKASH_NODE --dseq ${{env.AKASH_DSEQ}} --from ${{env.AKASH_FROM}} --provider $AKASH_PROVIDER
