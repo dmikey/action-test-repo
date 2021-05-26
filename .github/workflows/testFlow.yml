@@ -37,7 +37,8 @@ jobs:
           echo "AKASH_DSEQ=$AKASH_DSEQ" >> $GITHUB_ENV
       - name: update deployment
         run: |-
-          akash tx deployment update deploy.yml --dseq $AKASH_DSEQ --from ${{env.AKASH_FROM}} --chain-id $AKASH_CHAIN_ID --node $AKASH_NODE --gas=7000 -y
+          unset AKASH_GAS
+          akash tx deployment update deploy.yml --dseq $AKASH_DSEQ --from ${{env.AKASH_FROM}} --chain-id ${{env.AKASH_CHAIN_ID}}  --node ${{env.AKASH_NODE}} -y
       - name: query deployment
         run: |-
           akash provider lease-status --node ${{env.AKASH_NODE}} --dseq ${{env.AKASH_DSEQ}} --from ${{env.AKASH_FROM}} --provider ${{env.AKASH_PROVIDER}}
