@@ -30,14 +30,12 @@ jobs:
           rm key.key
       - name: import certificate
         run: echo "${{secrets.DEPLOY_CERT}}" > ${{env.AKASH_HOME}}/$(akash keys show ${{env.AKASH_FROM}} --output=json | jq -r ".address").pem
-      - name: get active deployments
+      - name: get last active deployments
         run: |-
-          akash query deployment list --owner "$(akash keys show "${{env.AKASH_FROM}}" -a)" --state active -o json --limit 10
-      - name: close all active deployments
+          export AKASH_DSEQ=$(akash query deployment list --owner "$(akash keys show "AKASH_GROWTH_TEAM" -a)" --state active -o json --limit 1 | jq -r ".deployments[0].deployment.deployment_id.dseq")
+      - name: update deployment
         run: |-
-          akash query deployment list --owner "$(akash keys show "${{env.AKASH_FROM}}" -a)" --state active -o json --limit 1000 | \
-            jq -r '.deployments[].deployment|select(.state == "active")|.deployment_id.dseq' | \
-              while read dseq; do
-                akash tx deployment close --from "${{env.AKASH_FROM}}" --dseq "$dseq" --broadcast-mode sync --yes
-                sleep 15
-              done
+          akash tx deployment update deploy.yml --dseq $AKASH_DSEQ --from $AKASH_FROM --chain-id $AKASH_CHAIN_ID --node $AKASH_NODE --fees=5000uakt -y
+      - name: query deployment
+        run: |-
+          akash provider lease-status --node $AKASH_NODE --dseq $AKASH_DSEQ --from $AKASH_FROM --provider $AKASH_PROVIDER

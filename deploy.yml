@@ -1,4 +1,4 @@
-version: '2.0'
+version: "2.0"
 
 services:
   web:
@@ -23,9 +23,9 @@ profiles:
     westcoast:
       attributes:
         host: akash
-      signedBy:depl
+      signedBy:
         anyOf:
-          - 'akash1365yvmc4s7awdyj3n2sav7xfx76adc6dnmlx63'
+          - "akash1365yvmc4s7awdyj3n2sav7xfx76adc6dnmlx63"
       pricing:
         web:
           denom: uakt
