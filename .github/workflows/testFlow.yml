@@ -5,7 +5,7 @@ env:
   AKASH_NODE: tcp://rpc0.mainnet.akash.network:26657
   AKASH_GAS: auto
   AKASH_GAS_ADJUSTMENT: 1.15
-  AKASH_GAS_PRICES: 0.025uakt
+  # AKASH_GAS_PRICES: 0.025uakt
   AKASH_SIGN_MODE: amino-json
   AKASH_CHAIN_ID: akashnet-2
   AKASH_FROM: AKASH_GROWTH_TEAM
