@@ -1,0 +1,17 @@
+name: Repository Dispatch
+on:
+  repository_dispatch:
+    types: [build-event]
+jobs:
+  buildEvent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract tag name
+        id: tag
+        uses: actions/github-script@0.2.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            return context.payload.ref.replace(/\/refs\/tags\//, '');
+      - name: Echo
+        run: echo ${{ steps.tag.outputs.result }}
