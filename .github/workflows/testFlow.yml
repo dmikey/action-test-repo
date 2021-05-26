@@ -1,6 +1,6 @@
 name: Update Deployment on Akash
 on:
-  create:
+  push:
     tags:
       - v*
 env:
