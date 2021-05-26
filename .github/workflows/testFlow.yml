@@ -11,7 +11,7 @@ env:
   AKASH_FROM: AKASH_GROWTH_TEAM
   AKASH_KEYRING_BACKEND: test
 jobs:
-  e2e-production:
+  publish-on-akash:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -33,3 +33,11 @@ jobs:
       - name: get active deployments
         run: |-
           akash query deployment list --owner "$(akash keys show "${{env.AKASH_FROM}}" -a)" --state active -o json --limit 10
+      - name: close all active deployments
+        run: |-
+          akash query deployment list --owner "$(akash keys show "${{env.AKASH_FROM}}" -a)" --state active -o json --limit 1000 | \
+            jq -r '.deployments[].deployment|select(.state == "active")|.deployment_id.dseq' | \
+              while read dseq; do
+                akash tx deployment close --from "${{env.AKASH_FROM}}" --dseq "$dseq" --broadcast-mode sync --yes
+                sleep 15
+              done
