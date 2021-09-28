@@ -7,13 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |-
-          export AKASH_WALLET_KEY_PASSWORD=$(echo "${{secrets.AKASH_WALLET_KEY_PASSWORD}}"|base64)
-          echo $AKASH_WALLET_KEY_PASSWORD
       - name: Akash On Github Actions
-        uses: dmikey/akash-on-gh-actions@v1.0.100
+        uses: dmikey/akash-on-gh-actions@v1.0.101
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           AKASH_WALLET_KEY: ${{secrets.AKASH_WALLET_KEY}}
           AKASH_WALLET_KEY_PASSWORD: ${{secrets.AKASH_WALLET_KEY_PASSWORD}}
           AKASH_DEPLOY_CERTIFICATE: ${{secrets.AKASH_DEPLOY_CERTIFICATE}}
+          AKASH_FROM: AKASH_GROWTH_TEAM
