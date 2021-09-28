@@ -1,4 +1,4 @@
-  name: Test Akash Composite Action
+name: Test Akash Composite Action
 on:
   workflow_dispatch:
 
