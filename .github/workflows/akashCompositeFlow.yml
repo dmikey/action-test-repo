@@ -11,7 +11,7 @@ jobs:
           export AKASH_WALLET_KEY_PASSWORD=$(echo "${{secrets.AKASH_WALLET_KEY_PASSWORD}}"|base64)
           echo $AKASH_WALLET_KEY_PASSWORD
       - name: Akash On Github Actions
-        uses: dmikey/akash-on-gh-actions@v1.0.98
+        uses: dmikey/akash-on-gh-actions@v1.0.99
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           AKASH_WALLET_KEY: ${{secrets.AKASH_WALLET_KEY}}
