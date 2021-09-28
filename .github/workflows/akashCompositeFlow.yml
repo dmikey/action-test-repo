@@ -8,6 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Akash On Github Actions
-        uses: dmikey/akash-on-gh-actions@v1.0.88
+        uses: dmikey/akash-on-gh-actions@v1.0.89
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
