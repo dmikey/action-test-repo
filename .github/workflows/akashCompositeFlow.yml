@@ -8,10 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Akash On Github Actions
-        uses: dmikey/akash-on-gh-actions@v1.0.103
+        uses: dmikey/akash-on-gh-actions@v1.0.104
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           AKASH_WALLET_KEY: ${{secrets.AKASH_WALLET_KEY}}
           AKASH_WALLET_KEY_PASSWORD: ${{secrets.AKASH_WALLET_KEY_PASSWORD}}
           AKASH_DEPLOY_CERTIFICATE: ${{secrets.AKASH_DEPLOY_CERTIFICATE}}
-          AKASH_FROM: AKASH_GROWTH_TEAM
