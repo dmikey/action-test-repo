@@ -39,12 +39,14 @@ jobs:
         run: |-
           export AKASH_DSEQ=$(akash query deployment list --owner "$(akash keys show "AKASH_GROWTH_TEAM" -a)" --state active -o json --limit 1 | jq -r ".deployments[0].deployment.deployment_id.dseq")
           echo "AKASH_DSEQ=$AKASH_DSEQ" >> $GITHUB_ENV
-      - name: update deployment
-        run: |-
+      - name: update deploy.yml
           git remote update
           export LATEST_TAG=$(git describe --abbrev=0 --tags)
-          echo $LATEST_TAG
-          akash tx deployment update deploy.yml --dseq $AKASH_DSEQ --from ${{env.AKASH_FROM}} --chain-id ${{env.AKASH_CHAIN_ID}}  --node ${{env.AKASH_NODE}} -y
+          sed -i -e 's/${tag}/'$LATEST_TAG'/g' deploy.yml
+      - name: update deployment
+        run: |-
+          unset AKASH_GAS
+          akash tx deployment update deploy.yml --dseq $AKASH_DSEQ --from ${{env.AKASH_FROM}} --chain-id ${{env.AKASH_CHAIN_ID}}  --node ${{env.AKASH_NODE}} --fees=5000uakt -y
       - name: query deployment
         run: |-
           akash provider lease-status --node ${{env.AKASH_NODE}} --dseq ${{env.AKASH_DSEQ}} --from ${{env.AKASH_FROM}} --provider ${{env.AKASH_PROVIDER}}
