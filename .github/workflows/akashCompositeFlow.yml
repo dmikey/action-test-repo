@@ -8,9 +8,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Akash On Github Actions
-        uses: dmikey/akash-on-gh-actions@v1.0.104
+        uses: dmikey/akash-on-gh-actions@v1.0.105
         with:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           AKASH_WALLET_KEY: ${{secrets.AKASH_WALLET_KEY}}
           AKASH_WALLET_KEY_PASSWORD: ${{secrets.AKASH_WALLET_KEY_PASSWORD}}
           AKASH_DEPLOY_CERTIFICATE: ${{secrets.AKASH_DEPLOY_CERTIFICATE}}
+      - run: akash keys list --keyring-backend test
