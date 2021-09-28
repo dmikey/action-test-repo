@@ -1,4 +1,4 @@
-name: Build and Publish Image
+  name: Test Akash Composite Action
 on:
   workflow_dispatch:
 
@@ -8,4 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Akash On Github Actions
-        uses: dmikey/akash-on-gh-actions@v1.0.87
+        uses: dmikey/akash-on-gh-actions@v1.0.88
+        with:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
