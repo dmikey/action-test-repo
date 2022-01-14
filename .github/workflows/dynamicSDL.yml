@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Akash on Github Actions Setup
-        uses: ovrclk/akash-ghaction-templated-sdl@v4-dev
+        uses: ovrclk/akash-ghaction-templated-sdl@v5-dev
         env:
           VERSION_TEST: 1234abcd
       - run: -|
