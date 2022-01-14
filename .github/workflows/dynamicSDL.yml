@@ -8,4 +8,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Akash on Github Actions Setup
-        uses: ovrclk/akash-ghaction-templated-sdl@v2-dev
+        uses: ovrclk/akash-ghaction-templated-sdl@v3-dev
