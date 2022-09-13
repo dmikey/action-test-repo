@@ -12,4 +12,4 @@ jobs:
         with:
           BLOCKLESS_ACCESS_TOKEN: ${{ secrets.BLOCKLESS_ACCESS_TOKEN }}
       - run: |-
-          bls function publish
+          bls function publish --path .
