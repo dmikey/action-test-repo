@@ -1,11 +1,11 @@
-name: Update Deployment on Akash
+name: Publish to Blockless
 on:
   workflow_dispatch:
 
 jobs:
-  publish-on-akash:
+  publish-on-blockless:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Blockless Action Setup
-        uses: txlabs/github-action-blockless-setup
+        uses: txlabs/github-action-blockless-setup@v0.0.1
