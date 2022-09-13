@@ -11,3 +11,5 @@ jobs:
         uses: txlabs/github-action-blockless-setup@v0.0.2
         with:
           BLOCKLESS_ACCESS_TOKEN: ${{ secrets.BLOCKLESS_ACCESS_TOKEN }}
+      - run: |-
+          bls function publish
