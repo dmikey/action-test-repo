@@ -12,5 +12,4 @@ jobs:
         with:
           BLOCKLESS_ACCESS_TOKEN: ${{ secrets.BLOCKLESS_ACCESS_TOKEN }}
       - run: |-
-          npm i
           bls function deploy
